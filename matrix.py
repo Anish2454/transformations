@@ -1,44 +1,51 @@
 import math
 
 def make_translate( x, y, z ):
-	transform_matrix = ident(new_matrix())
-	transform_matrix[0][3] = x
-	transform_matrix[1][3] = y
-	transform_matrix[2][3] = z
+	transform_matrix = new_matrix()
+	ident(transform_matrix)
+	transform_matrix[3][0] = x
+	transform_matrix[3][1] = y
+	transform_matrix[3][2] = z
+	#print_matrix(transform_matrix)
 	return transform_matrix
 
 def make_scale( x, y, z ):
-	transform_matrix = ident(new_matrix())
-    transform_matrix[0][0] = x
-    transform_matrix[1][1] = y
-    transform_matrix[2][2] = z
-    return transform_matrix
+	transform_matrix = new_matrix()
+	ident(transform_matrix)
+	transform_matrix[0][0] = x
+	transform_matrix[1][1] = y
+	transform_matrix[2][2] = z
+	return transform_matrix
 
 def make_rotX( theta ):
-	radians = math.radians(theta)    
-    transform_matrix = ident(new_matrix())
-    transform_matrix[1][1] = math.cos(radians)
-    transform_matrix[1][2] = (-1 * math.sin(radians))
-    transform_matrix[2][1] = math.sin(radians)
-    transform_matrix[2][2] = math.cos(radians)
-    return transform_matrix
-     
+	print theta
+	radians = math.radians(theta)
+	transform_matrix = new_matrix()
+	ident(transform_matrix)
+	transform_matrix[1][1] = math.cos(radians)
+	transform_matrix[2][1] = (-1 * math.sin(radians))
+	transform_matrix[1][2] = math.sin(radians)
+	transform_matrix[2][2] = math.cos(radians)
+	return transform_matrix
+
 
 def make_rotY( theta ):
-    radians = math.radians(theta)    
-    transform_matrix = ident(new_matrix())
-    transform_matrix[0][0] = math.cos(radians)
-    transform_matrix[0][2] = math.sin(radians)
-    transform_matrix[2][0] = (-1 * math.sin(radians))
-    transform_matrix[2][2] = math.cos(radians)
-    return transform_matrix
+	radians = math.radians(theta)
+	transform_matrix = new_matrix()
+	ident(transform_matrix)
+	transform_matrix[0][0] = math.cos(radians)
+	transform_matrix[2][0] = math.sin(radians)
+	transform_matrix[0][2] = (-1 * math.sin(radians))
+	transform_matrix[2][2] = math.cos(radians)
+	return transform_matrix
 
 def make_rotZ( theta ):
-	radians = math.radians(theta)    
-	transform_matrix = ident(new_matrix())
+	radians = math.radians(theta)
+	transform_matrix = new_matrix()
+	ident(transform_matrix)
 	transform_matrix[0][0] = math.cos(radians)
-	transform_matrix[0][1] = (-1 * math.sin(radians))
-	transform_matrix[1][0] = math.sin(radians)
+	transform_matrix[1][0] = (-1 * math.sin(radians))
+	transform_matrix[0][1] = math.sin(radians)
 	transform_matrix[1][1] = math.cos(radians)
 	return transform_matrix
 
@@ -62,7 +69,7 @@ def scalar_mult( matrix, s ):
     for r in range( len( matrix[0] ) ):
         for c in range( len(matrix) ):
             matrix[c][r]*= s
-            
+
 #m1 * m2 -> m2
 def matrix_mult( m1, m2 ):
 
@@ -70,7 +77,7 @@ def matrix_mult( m1, m2 ):
     for row in m2:
         #get a copy of the next point
         tmp = row[:]
-        
+
         for r in range(4):
             m2[point][r] = (m1[0][r] * tmp[0] +
                             m1[1][r] * tmp[1] +
