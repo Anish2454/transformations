@@ -9,4 +9,4 @@ edges = []
 transform = new_matrix()
 ident(transform)
 
-parse_file('script2', edges, transform, screen, color )
+parse_file('script', edges, transform, screen, color )
